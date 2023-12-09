@@ -2,7 +2,6 @@ pragma solidity ^0.8.0;
 
 contract PayContract {
     struct Preferences{
-        address redirectAddress;
         uint256 chainID;
         address TokenAddress;
     }
@@ -11,40 +10,36 @@ contract PayContract {
     mapping(string => string) public AadhaarToEmail;
     mapping(string => string) public EmailToAadhaar;
     mapping(address => Preferences) public WalletToPreferences;
+    mapping(address => address payable) public Redirection;
 
     function KYC(string memory Aadhaar, string memory email) public {
         AadhaarToEmail[Aadhaar] = email;
         EmailToAadhaar[email] = Aadhaar;
         mailToWallet[email] = payable(msg.sender);
-    }//Thik Kardo bhai
-
-    function SetPreferences(uint256 chainID, address TokenID,address redirectAddress) public{
-        WalletToPreferences[msg.sender] = Preferences(redirectAddress,chainID,TokenID);
     }
 
-    // function addEmail(string memory emailid, address addr) public {
-    //     AR[emailid] = payable(addr);
-    //     if(pendingPayments[emailid] > 0){
-    //         AR[emailid].transfer(pendingPayments[emailid]);
-    //         pendingPayments[emailid] = 0;
-    //     }
-    // }
+    function SetPreferences(uint256 chainID, address TokenID) public{
+        WalletToPreferences[msg.sender] = Preferences(chainID,TokenID);
+    }
 
-    // function addNumber(string memory number, address addr) public {
-    //     require(msg.sender==Special_Signer,"Access Denied! Error Code:420");
-    //     AR[number] = payable(addr);
-    //     if(pendingPayments[number] > 0){
-    //         AR[number].transfer(pendingPayments[number]);
-    //         pendingPayments[number] = 0;
-    //     }
-    // }
+    function SetRedirection(address recipient) public{
+        Redirection[msg.sender] = payable(recipient);
+    }
 
-    function Pay(string memory id) public payable {
+    function Pay(string memory email) public payable {
         require(msg.value > 0, "Not enough Ether provided.");
-        if(mailToWallet[id] == address(0)){
-            pendingPayments[id] += msg.value;
-        } else {
-            mailToWallet[id].transfer(msg.value);
+        address payable tempAddress;
+        if(Redirection[mailToWallet[email]]==address(0)){
+            tempAddress = payable(msg.sender);
+            if(mailToWallet[email] == address(0)){
+                pendingPayments[email] += msg.value;
+            } else {
+                mailToWallet[email].transfer(msg.value);
+            }
+        }
+        else{
+            tempAddress = payable(Redirection[mailToWallet[email]]);
+            tempAddress.transfer(msg.value);
         }
     }
 }
