@@ -34,6 +34,10 @@ const MyAccountPage = () => {
             }
         })();
     })
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+        toast.success("Copied to clipboard")
+    } 
     return (
         <>
             <AppNav />
@@ -47,7 +51,7 @@ const MyAccountPage = () => {
 
                                 <div className="mt-4 space-y-2">
                                     <Tooltip title={usession.eoa}>
-                                        <p className="text-sm">{trimWalletAddress(usession.eoa || "")}</p>
+                                        <p onClick={e => copyToClipboard(usession.eoa)} className="text-sm">{trimWalletAddress(usession.eoa || "")}</p>
                                     </Tooltip>
                                     <p className="text-sm">{user.email}</p>
                                 </div>

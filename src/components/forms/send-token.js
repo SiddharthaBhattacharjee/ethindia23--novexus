@@ -96,15 +96,23 @@ const SendTokenForm = ({ route, data }) => {
         const ft = Tokens.filter((v, index) => v.val == preferenceNetwork);
         console.log(ft)
         setPrefAddrShow(ft[0].name);
+        // console.log(parseEther(amountInput).toString())
+
         if (!sendBtn) {
             setSendBtn(true)
         } else {
+            // const result  = await contract.Pay(emailInput, {value: parseEther(amountInput)})
             // CODE HERE (1INCH SWAP)
-            
+            // console.log(parseEther(amountInput).toString())
             // const payment = await contract.Pay(emailInput
-            //     // , {value: parseEther(amountInput).toString()}
+            //     , {value: parseEther(amountInput).toString()}
             //     )
-            // console.log(payment);
+            // const tx = {
+            //     to: CONTRACT_ADDRESS,
+            //     value: parseEther(amountInput)
+            // };
+            // const transaction = await txsigner.sendTransaction(tx);
+            // console.log(transaction);
             /*TEMPORARY*/
 
             // navigate('/send/approve-txn');

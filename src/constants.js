@@ -5,68 +5,6 @@ const CONTRACT_ABI = [
         "inputs": [
             {
                 "internalType": "string",
-                "name": "Aadhaar",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "email",
-                "type": "string"
-            }
-        ],
-        "name": "KYC",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "email",
-                "type": "string"
-            }
-        ],
-        "name": "Pay",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint256",
-                "name": "chainID",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "TokenID",
-                "type": "address"
-            }
-        ],
-        "name": "SetPreferences",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "recipient",
-                "type": "address"
-            }
-        ],
-        "name": "SetRedirection",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "string",
                 "name": "",
                 "type": "string"
             }
@@ -105,6 +43,117 @@ const CONTRACT_ABI = [
         "inputs": [
             {
                 "internalType": "string",
+                "name": "Aadhaar",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "email",
+                "type": "string"
+            }
+        ],
+        "name": "KYC",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
+                "name": "email",
+                "type": "string"
+            }
+        ],
+        "name": "Pay",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "Redirection",
+        "outputs": [
+            {
+                "internalType": "address payable",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "chainID",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "TokenID",
+                "type": "address"
+            }
+        ],
+        "name": "SetPreferences",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            }
+        ],
+        "name": "SetRedirection",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "WalletToPreferences",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "chainID",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "TokenAddress",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "string",
                 "name": "",
                 "type": "string"
             }
@@ -134,49 +183,6 @@ const CONTRACT_ABI = [
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "Redirection",
-        "outputs": [
-            {
-                "internalType": "address payable",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "WalletToPreferences",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "chainID",
-                "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "TokenAddress",
-                "type": "address"
             }
         ],
         "stateMutability": "view",

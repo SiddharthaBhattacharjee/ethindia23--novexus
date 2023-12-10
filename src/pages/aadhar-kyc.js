@@ -111,7 +111,10 @@ const AadharKYCPage = () => {
             }
         }
     }
-
+    function copyToClipboard(text){
+        navigator.clipboard.writeText(text)
+        toast.success("Copied to clipboard")
+    } 
     return (
         <>
             {
@@ -126,7 +129,7 @@ const AadharKYCPage = () => {
                                 <div className="flex  justify-between items-center">
                                     <h1>EOA</h1>
                                     <Tooltip title={usession.eoa}>
-                                        <p>{trimWalletAddress(usession.eoa || "") || "..."}</p>
+                                        <p onClick={e => copyToClipboard(usession.eoa)}>{trimWalletAddress(usession.eoa || "") || "..."}</p>
                                     </Tooltip>
                                 </div>
                                 <div className="flex  justify-between items-center">
