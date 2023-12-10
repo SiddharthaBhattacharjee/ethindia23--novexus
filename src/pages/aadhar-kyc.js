@@ -155,7 +155,8 @@ const AadharKYCPage = () => {
                                 <div className="flex flex-col gap-y-5 text-sm">
                                     <div className="flex  justify-between items-center">
                                         <h1>EOA</h1>
-                                        <p>{trimWalletAddress(usession.eoa || "") || "..."}</p>
+                                        {/* <p>{trimWalletAddress(usession.eoa || "") || "..."}</p> */}
+                                        <p>{usession.eoa || "" || "..."}</p>
                                     </div>
                                 </div>
                                 <div className="my-8 flex items-center justify-center">
