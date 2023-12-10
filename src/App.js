@@ -3,6 +3,7 @@ import './App.css';
 import { Suspense, lazy } from 'react';
 import Preloader from './components/shared/preloader';
 import { AnonAadhaarProvider } from 'anon-aadhaar-react';
+import Home from './pages/home-r';
 
 const JustForDevHome = lazy(() => import('./pages/just-for-dev'));
 const AuthPage = lazy(() => import('./pages/auth'));
@@ -22,7 +23,7 @@ function App() {
       <AnonAadhaarProvider _appId={app_id}>
         <Suspense fallback={<Preloader />}>
           <Routes>
-            <Route path="/" element={<JustForDevHome />} />
+            <Route path="/" element={<Home />} />
             <Route path="/auth" element={<AuthPage />} />
             <Route path="/home" element={<AppHome />} />
             <Route path="/mobi-scanner" element={<QRScannerPage />} />

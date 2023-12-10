@@ -5,14 +5,14 @@ const extractUPIFromLink = (upiLink) => {
         const url = new URL(upiLink);
         const searchParams = new URLSearchParams(url.search);
         const upiId = searchParams.get('pa');
-        
+
         if (upiId) {
             return decodeURIComponent(upiId);
         }
     } catch (error) {
         return false;
     }
-    
+
     return null;
 };
 
@@ -29,7 +29,16 @@ const validateUPI = (upiId) => {
     }
 };
 
+const validateEmail = (email) => {
+    return String(email)
+        .toLowerCase()
+        .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
+};
+
+
 const trimWalletAddress = (address) => {
-    return `${ address.substring(0, 8) }...${ address.substring(36) }`;
+    return `${address.substring(0, 8)}...${address.substring(36)}`;
 }
-export { cn, validateUPI, extractUPIFromLink, trimWalletAddress };
+export { cn, validateUPI, extractUPIFromLink, trimWalletAddress, validateEmail };

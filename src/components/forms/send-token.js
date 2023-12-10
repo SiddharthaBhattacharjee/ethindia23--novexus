@@ -10,7 +10,7 @@ import { MemStorage } from "../../contexts/storage";
 import { CONTRACT_ABI, CONTRACT_ADDRESS, Tokens, chains } from "../../constants";
 import { GlobalContext } from "../../contexts/global";
 import { message } from "antd";
-import { BrowserProvider, ethers } from "ethers";
+import { BrowserProvider, ethers, parseEther } from "ethers";
 
 
 const SendTokenForm = ({ route, data }) => {
@@ -28,6 +28,9 @@ const SendTokenForm = ({ route, data }) => {
         [amountInput, setAmountInput] = useState(data?.data.amount),
         [chainInput, setChainInput] = useState(data?.data.chain),
         [tokenInput, setTokenInput] = useState(data?.data.token);
+    const [redir_addrShow, setRedirAddrShow] = useState('');
+    const [pref_addrShow, setPrefAddrShow] = useState('');
+    const [sendBtn, setSendBtn] = useState(false)
 
     const isMounted = useRef(false);
     useEffect(() => {
@@ -65,7 +68,7 @@ const SendTokenForm = ({ route, data }) => {
             }
         });
 
-        setView('loading');
+        // setView('loading');
         const txsigner = await provider.getSigner();
         const contract = new ethers
             .Contract(CONTRACT_ADDRESS, JSON.parse(JSON.stringify(CONTRACT_ABI)), txsigner);
@@ -79,21 +82,33 @@ const SendTokenForm = ({ route, data }) => {
 
         // GET REDIRECTION DETAILS
         const redir_addr = await contract.Redirection(wallet_addr);
-        if (redir_addr == "0x0000000000000000000000000000000000000000"){
-           var pref_addr = wallet_addr;
+        setRedirAddrShow(redir_addr);
+        if (redir_addr == "0x0000000000000000000000000000000000000000") {
+            var pref_addr = wallet_addr;
         } else {
             var pref_addr = redir_addr;
         }
 
+
         // GET PREFERENCE DETAILS
         const preference = await contract.WalletToPreferences(pref_addr);
         const preferenceNetwork = preference[1];
+        const ft = Tokens.filter((v, index) => v.val == preferenceNetwork);
+        console.log(ft)
+        setPrefAddrShow(ft[0].name);
+        if (!sendBtn) {
+            setSendBtn(true)
+        } else {
+            // CODE HERE (1INCH SWAP)
+            
+            // const payment = await contract.Pay(emailInput
+            //     // , {value: parseEther(amountInput).toString()}
+            //     )
+            // console.log(payment);
+            /*TEMPORARY*/
 
-        // CODE HERE (1INCH SWAP)
-        
-        /*TEMPORARY*/
-
-        // navigate('/send/approve-txn');
+            // navigate('/send/approve-txn');
+        }
     }
     return (
         <>
@@ -117,6 +132,10 @@ const SendTokenForm = ({ route, data }) => {
                                 </button>
                             </h1>
                         }
+                        {
+                            redir_addrShow != "" && <p className="text-red-500">This payment is being redirected to <b>{redir_addrShow}</b></p>
+                        }
+
                         <div className="flex flex-col gap-y-2">
                             <label htmlFor="chain" className="block text-sm font-medium">
                                 Chain
@@ -150,6 +169,9 @@ const SendTokenForm = ({ route, data }) => {
                                 <option value={null}>Select Token</option>
                                 {Tokens.map(token => <option value={token.val}>{token.name}</option>)}
                             </select>
+                            {
+                                pref_addrShow != "" && <p className="text-red-500">The user prefers to receive payments in <b>{pref_addrShow}</b>. The tokens will be swapped and sent!</p>
+                            }
                         </div>
                         <div className="flex flex-col gap-y-2">
                             <label htmlFor="amount" className="block text-sm font-medium">
@@ -170,7 +192,7 @@ const SendTokenForm = ({ route, data }) => {
                         </div>
                         <div className="pt-10">
                             <button className="bg-[#8FFF00] text-black w-full rounded-xl text-lg p-3 font-semibold">
-                                Send Tokens
+                                {sendBtn ? "Send" : "Verify"} Tokens
                             </button>
                         </div>
                     </form>

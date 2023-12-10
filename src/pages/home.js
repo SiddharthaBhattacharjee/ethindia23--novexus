@@ -51,7 +51,6 @@ const AppHome = () => {
                         <div className="flex flex-col gap-4">
                             <Card text={'See transaction history'} />
                             <Card text={'Revolutionize Gifting with Lifafa'} />
-                            <Card text={'Check Did Credibility'} />
                         </div>
                     </div>
                 </div>
