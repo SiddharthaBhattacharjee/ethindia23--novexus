@@ -8,6 +8,7 @@ import HrLineStyled from "../components/shared/hr-styled";
 import Card from "../components/shared/card";
 import { AiFillBank, AiOutlineUserSwitch } from "react-icons/ai";
 import { TiContacts } from "react-icons/ti";
+import { IoMailOutline } from "react-icons/io5";
 
 const AppHome = () => {
     return (
@@ -16,26 +17,16 @@ const AppHome = () => {
 
             <div className="my-20 mx-10">
                 {/* Hero section start */}
-                <div className="grid grid-cols-4 gap-8 place-items-center">
+                <div className="flex items-center justify-center gap-16">
                     <ActionCard
                         icon={<MdOutlineQrCodeScanner className="text-2xl" />}
-                        title={'Bank Transfer'}
+                        title={'Scan QR'}
                         route={'/mobi-scanner'}
                     />
                     <ActionCard
-                        icon={<AiFillBank className="text-2xl" />}
-                        title={'Bank Transfer'}
-                        route={''}
-                    />
-                    <ActionCard
-                        icon={<TiContacts className="text-2xl" />}
-                        title={'Bank Transfer'}
-                        route={''}
-                    />
-                    <ActionCard
-                        icon={<AiOutlineUserSwitch className="text-2xl" />}
-                        title={'Bank Transfer'}
-                        route={''}
+                        icon={<IoMailOutline className="text-2xl" />}
+                        title={'Transfer to Email'}
+                        route={'/send/email'}
                     />
 
                 </div>

@@ -34,6 +34,9 @@ const JustForDevHome = () => {
                             <li>
                                 <Link to="/myaccount">/myaccount</Link>
                             </li>
+                            <li>
+                                <Link to="/e-kyc">/e-kyc</Link>
+                            </li>
                         </ul>
                     </div>
                 </div>
